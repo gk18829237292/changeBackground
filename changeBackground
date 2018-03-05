@@ -50,6 +50,7 @@ function setAsBackground(){
 
 
 #执行刚才的fuction
+mkdir -p ${localPath}
 getUrl
 downloadImg
-setAsBackgroun
+setAsBackground
