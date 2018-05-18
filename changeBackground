@@ -7,6 +7,8 @@
 #		修改图片名称为当前时间戳
 #	3.2017年04月11日19:39:58
 #   	重构
+#	4.2018年05月18日09:51:46
+#		curl获取出现问题,暂时用wget替代
 
 # 必应网址
 baseUrl="http://cn.bing.com"
@@ -22,7 +24,8 @@ function getUrl(){
 	# curl -sS $baseUrl 爬取必应的source
 	# | 管道符 前面的输出 为后面的输入
 	# grep -o 使用正则表达式查找匹配到的字符串
-	image_url=$(curl -sS $baseUrl | grep -o "g_img={url:[^,]*") # 2017年04月11日19:53:12 输入结果为 g_img={url: "/az/hprichbg/rb/WindmillLighthouse_ZH-CN12870536851_1920x1080.jpg"
+	#image_url=$(curl -sS $baseUrl | grep -o "g_img={url:[^,]*") # 2017年04月11日19:53:12 输入结果为 g_img={url: "/az/hprichbg/rb/WindmillLighthouse_ZH-CN12870536851_1920x1080.jpg"
+	image_url=$(wget -q -O - $baseUrl | grep -o "g_img={url:[^,]*") # 2017年04月11日19:53:12 输入结果为 g_img={url: "/az/hprichbg/rb/WindmillLighthouse_ZH-CN12870536851_1920x1080.jpg"
 	
 	#删除冒号前面的部分 ## 从前面开始删除字符串
 	image_url=${image_url##*:} # g_img={url: "/az/hprichbg/rb/WindmillLighthouse_ZH-CN12870536851_1920x1080.jpg"  -> "/az/hprichbg/rb/WindmillLighthouse_ZH-CN12870536851_1920x1080.jpg"
